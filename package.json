@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "prisma generate && next build",
+    "postinstall": "prisma generate",
+    "start": "next start"
   },
-  "dependencies": {
+    "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@prisma/client": "^6.11.1",
     "@react-google-maps/api": "^2.20.7",
