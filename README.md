@@ -1,101 +1,125 @@
-🚀 Swipe Savvy - Freemium Business Listing
-A full-stack, multi-step landing page with smart lead capture, Google Places autocomplete, Stripe upgrade flow, and PostgreSQL storage — built with Next.js 15 App Router, Prisma, Neon, and Tailwind CSS.
+# 🧠 Swipe Savvy Freemium Assessment
 
-📆 Completed on: July 10, 2025
-🧑‍💻 Built by: Megha John
+A full-stack business onboarding experience built as part of a hiring assessment using **Next.js**, **PostgreSQL**, **Prisma**, and **Tailwind CSS**.
 
+---
 
-🧠 Features
-✅ Hero Search: Business lookup (mocked or Google Places API)
+## 🚀 Tech Stack
 
-✅ Multi-Step Flow:
+- **Frontend**: Next.js 15, TypeScript, Tailwind CSS
+- **Backend**: Next.js API Routes
+- **Database**: PostgreSQL (hosted on [Neon.tech](https://neon.tech))
+- **ORM**: Prisma
+- **Payments**: Stripe (test environment)
+- **Places Autocomplete**: Google Places API
 
-Step 1: Business search
+---
 
-Step 2: Confirmation card
+## 🌟 Features
 
-Step 3: Create Account (name, email, phone, website)
+### 🔹 Hero Section (Step 1)
+- Google Places autocomplete input
+- Background blur + call-to-action UI
+- Client testimonials (scrolling bar)
 
-Step 4: Terms + Upgrade options
+### 🔹 Business Verification (Step 2)
+- Matches user entry with business name and phone
+- Displays confirmation UI with business card
+- Stores selection in `localStorage`
 
-✅ Stripe Checkout (post-trial freemium conversion)
+### 🔹 Create Account (Step 3)
+- Full Name, Email, Phone, Website form
+- Database update for the lead via Prisma
+- Checkbox to confirm business ownership
 
-✅ Lead Capture: All user input stored in PostgreSQL via Neon
+### 🔹 Free Plan Confirmation (Step 4)
+- Shows Free Plan features
+- Upgrade card with Stripe checkout
+- Confetti animation after payment success
 
-✅ Confetti Celebration 🎉
+### 🔹 Premium Plan Celebration
+- Visual confirmation for paid users
+- Returns to homepage after celebration
 
-✅ Responsive + Animated UI with Tailwind + Framer Motion
+---
 
-🛠 Tech Stack
-Frontend	Backend/API	Database	Auth / Payments
-Next.js 15 App Router	API Routes (Node.js)	PostgreSQL via Neon	Stripe Checkout
-Tailwind CSS	Prisma ORM	Prisma Schema	(Optional: Supabase)
-Framer Motion	TypeScript	Neon Dashboard	
+## 🛠 Setup Instructions
 
-🗂 Folder Structure
-pgsql
-Copy
-Edit
-app/
-  ├─ api/leads         → lead creation & updates
-  ├─ api/checkout      → Stripe checkout session
-  ├─ verify            → confirm business page
-  ├─ create-account    → form to collect user info
-  ├─ success           → upgrade celebration page
-  └─ terms             → TOS & opt-in upgrade
-💾 Database Schema
-prisma
-Copy
-Edit
-model Lead {
-  id        String   @id @default(uuid())
-  business  String
-  phone     String?
-  upgraded  Boolean  @default(false)
-  fullName  String?
-  email     String?
-  website   String?
-  createdAt DateTime @default(now())
-}
-⚙️ Setup & Development
-bash
-Copy
-Edit
+### 1. Clone this Repo
+```bash
 git clone https://github.com/John27052001/swipe-savvy.git
 cd swipe-savvy
+```
 
-# Install dependencies
+### 2. Install Dependencies
+```bash
 npm install
+```
 
-# Add your environment variables
-touch .env.local
-Required .env.local
-ini
-Copy
-Edit
-DATABASE_URL=postgresql://...
-STRIPE_SECRET_KEY=sk_test_...
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
-Then run locally:
-bash
-Copy
-Edit
+### 3. Set Up Environment Variables
+Create a `.env` file:
+```env
+DATABASE_URL="your_postgresql_url"
+STRIPE_SECRET_KEY="your_stripe_secret_key"
+STRIPE_PRICE_ID="your_stripe_price_id"
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY="your_google_maps_key"
+NEXT_PUBLIC_BASE_URL="http://localhost:3000"
+```
+
+### 4. Run Prisma Migrations
+```bash
 npx prisma generate
 npx prisma migrate dev --name init
+```
+
+### 5. Start Local Dev Server
+```bash
 npm run dev
-🧪 Test Stripe
-Use Stripe test card:
-4242 4242 4242 4242 — Exp: 12/34 — CVC: 123
+```
+Open [http://localhost:3000](http://localhost:3000)
 
-📌 Deployment
-Frontend + API hosted on Vercel
+---
 
-Database hosted on Neon
+## 🎥 Video Walkthrough
+Coming soon...
 
-Stripe integrated securely in server API route
+---
 
-🙌 Acknowledgments
-Inspired by real-world SaaS upgrade flows like Square, ToastTab, and Yelp.
+## 📁 Folder Structure
+```
+├── app/
+│   ├── api/
+│   │   ├── leads/route.ts
+│   │   └── checkout/route.ts
+│   ├── verify/page.tsx
+│   ├── create-account/page.tsx
+│   ├── success/page.tsx
+│   └── terms/page.tsx
+├── prisma/
+│   ├── schema.prisma
+│   └── migrations/
+├── public/
+├── components/
+├── .env.local
+├── tailwind.config.ts
+├── next.config.ts
+└── README.md
+```
 
-💬 Contact
-Megha John
+---
+
+## 🧪 Notes
+- Stripe is in **test mode**
+- Google Maps API is restricted to Places
+- Deployment-ready with Vercel if needed
+
+---
+
+## 👩‍💻 Author
+**Megha John**  
+Email: meghajohnbabu@gmail.com  
+GitHub: [@John27052001](https://github.com/John27052001)
+
+---
+
+> Made with ❤️ for the Swipe Savvy assessment
