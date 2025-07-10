@@ -7,7 +7,11 @@ type CreateLeadInput = {
   business: string;
   phone: string;
   upgraded?: boolean;
+  fullName?: string;
+  email?: string;
+  website?: string;
 };
+
 
 type UpdateLeadInput = {
   id: string;
@@ -26,9 +30,13 @@ export async function POST(req: NextRequest) {
       data: {
         business: data.business,
         phone: data.phone,
+        fullName: data.fullName ?? null,
+        email: data.email ?? null,
+        website: data.website ?? null,
         upgraded: data.upgraded ?? false,
       },
     });
+    
 
     return NextResponse.json(newLead);
   } catch (error) {

@@ -36,11 +36,12 @@ export default function VerifyPage() {
         body: JSON.stringify({
           business: selectedBusiness,
           phone: business.phone,
+          fullName: localStorage.getItem('fullName'),
+          email: localStorage.getItem('email'),
+          website: localStorage.getItem('website'),
           upgraded: false,
-          fullName: null,
-          email: null,
-          website: null,
         }),
+        
       });
 
       if (!res.ok) {
