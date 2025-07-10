@@ -49,28 +49,3 @@ export async function POST(req: NextRequest) {
   }
   
 }
-
-export async function PUT(req: NextRequest) {
-  try {
-    const data: UpdateLeadInput = await req.json();
-    console.log('PUT data:', data);
-
-    const updatedLead = await prisma.lead.update({
-      where: { id: data.id },
-      data: { 
-        fullName: data.fullName ?? undefined,
-        email: data.email ?? undefined,
-        website: data.website ?? undefined,
-        phone: data.phone ?? undefined,
-      }
-    });
-
-    return NextResponse.json(updatedLead);
-  } catch (error) {
-    console.error('❌ PUT Error:', error);
-    return new NextResponse(
-      `Error updating lead: ${(error as Error).message}`,
-      { status: 500 }
-    );
-  }
-}
