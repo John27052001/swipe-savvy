@@ -1,4 +1,3 @@
-// ✅ Verify Page with Save Lead on Confirm
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -38,25 +37,27 @@ export default function VerifyPage() {
           business: selectedBusiness,
           phone: business.phone,
           upgraded: false,
-          fullName: localStorage.getItem('fullName'),
-          email: localStorage.getItem('email'),
-          website: localStorage.getItem('website'),
+          fullName: null,
+          email: null,
+          website: null,
         }),
-        });
-      
+      });
+
       if (!res.ok) {
+        const errorDetails = await res.text();
+        console.error('❌ Failed to create lead:', errorDetails);
         throw new Error('Failed to create lead');
       }
-      
-      const result = await res.json(); // only if body exists
+
+      const result = await res.json();
+      console.log('✅ Lead created:', result);
+
       localStorage.setItem('leadId', result.id);
       router.push('/create-account');
-      
+
     } catch (err) {
-      console.error('❌ Error from /verify:', err); // <-- Add this
+      console.error('❌ Error in handleConfirmBusiness:', err);
       alert('Something went wrong. Please try again.');
-        
-         
     }
   };
 
@@ -98,7 +99,7 @@ export default function VerifyPage() {
           We found the following match for your entry. Please confirm before proceeding.
         </p>
 
-        {/* Business Info Card with Restaurant Icon */}
+        {/* Business Info Card */}
         <div className="bg-white rounded-lg p-4 mb-4 shadow border text-left relative">
           <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
             <div className="bg-white rounded-full p-2 shadow-md">

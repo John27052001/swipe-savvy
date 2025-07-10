@@ -33,11 +33,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(newLead);
   } catch (error) {
     console.error('❌ POST Error:', error);
+  
     return new NextResponse(
-      `Error creating lead: ${(error as Error).message}`,
+      JSON.stringify({ error: (error as Error).message }),
       { status: 500 }
     );
   }
+  
 }
 
 export async function PUT(req: NextRequest) {
