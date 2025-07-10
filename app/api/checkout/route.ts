@@ -10,6 +10,7 @@ export async function POST(req: NextRequest) {
   const domain = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 
   try {
+    console.log('Creating Stripe session...');
     const session = await stripe.checkout.sessions.create({
       mode: 'subscription',
       payment_method_types: ['card'],
@@ -26,7 +27,9 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    console.log('✅ Session created:', session.url);
     return NextResponse.json({ url: session.url });
+
   } catch (err) {
     console.error('❌ Stripe error:', err);
     return new NextResponse('Failed to create Stripe session', { status: 500 });
