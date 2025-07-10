@@ -38,8 +38,11 @@ export default function VerifyPage() {
           business: selectedBusiness,
           phone: business.phone,
           upgraded: false,
+          fullName: localStorage.getItem('fullName'),
+          email: localStorage.getItem('email'),
+          website: localStorage.getItem('website'),
         }),
-      });
+        });
       
       if (!res.ok) {
         throw new Error('Failed to create lead');

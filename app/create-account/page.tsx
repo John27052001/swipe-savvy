@@ -1,4 +1,4 @@
-// ✅ Create Account Page with Console Log for Debugging
+// ✅ Create Account Page: Sends PUT to update lead with full name/email
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -33,24 +33,14 @@ export default function CreateAccountPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!formData.agree) {
       alert('Please agree to the terms before continuing.');
       return;
     }
 
-    const leadId = localStorage.getItem('leadId');
-    if (!leadId) {
-      alert('Lead ID not found!');
-      return;
-    }
-
-    console.log('🔍 Submitting:', {
-      id: leadId,
-      ...formData,
-    });
-
     try {
+      const leadId = localStorage.getItem('leadId');
+
       await fetch('/api/leads', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -58,14 +48,14 @@ export default function CreateAccountPage() {
           id: leadId,
           fullName: formData.fullName,
           email: formData.email,
-          website: formData.website,
           phone: formData.phone,
+          website: formData.website,
         }),
       });
 
       router.push('/terms');
-    } catch (err) {
-      console.error('❌ Failed to update lead:', err);
+    } catch (error) {
+      console.error('Failed to update lead:', error);
       alert('Something went wrong. Please try again.');
     }
   };

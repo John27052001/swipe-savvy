@@ -3,9 +3,23 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
 
+type CreateLeadInput = {
+  business: string;
+  phone: string;
+  upgraded?: boolean;
+};
+
+type UpdateLeadInput = {
+  id: string;
+  fullName?: string;
+  email?: string;
+  website?: string;
+  phone?: string;
+};
+
 export async function POST(req: NextRequest) {
   try {
-    const data = await req.json();
+    const data: CreateLeadInput = await req.json();
     console.log('POST data:', data);
 
     const newLead = await prisma.lead.create({
@@ -19,28 +33,34 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(newLead);
   } catch (error) {
     console.error('❌ POST Error:', error);
-    return new NextResponse('Error creating lead', { status: 500 });
+    return new NextResponse(
+      `Error creating lead: ${(error as Error).message}`,
+      { status: 500 }
+    );
   }
 }
 
 export async function PUT(req: NextRequest) {
   try {
-    const data = await req.json();
+    const data: UpdateLeadInput = await req.json();
     console.log('PUT data:', data);
 
-    const updated = await prisma.lead.update({
+    const updatedLead = await prisma.lead.update({
       where: { id: data.id },
-      data: {
-        fullName: data.fullName,
-        email: data.email,
-        website: data.website,
-        phone: data.phone,
-      },
+      data: { 
+        fullName: data.fullName ?? undefined,
+        email: data.email ?? undefined,
+        website: data.website ?? undefined,
+        phone: data.phone ?? undefined,
+      }
     });
 
-    return NextResponse.json(updated);
+    return NextResponse.json(updatedLead);
   } catch (error) {
     console.error('❌ PUT Error:', error);
-    return new NextResponse('Error updating lead', { status: 500 });
+    return new NextResponse(
+      `Error updating lead: ${(error as Error).message}`,
+      { status: 500 }
+    );
   }
 }

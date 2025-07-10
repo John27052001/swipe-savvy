@@ -9,11 +9,10 @@ datasource db {
 model Lead {
   id        String   @id @default(uuid())
   business  String
-  phone     String?
+  phone     String
   upgraded  Boolean  @default(false)
   createdAt DateTime @default(now())
-
-  fullName  String?
+  fullName  String?   // ✅ This is what TypeScript will generate types from
   email     String?
   website   String?
 }
