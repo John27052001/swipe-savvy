@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🚀 Swipe Savvy - Freemium Business Listing
+A full-stack, multi-step landing page with smart lead capture, Google Places autocomplete, Stripe upgrade flow, and PostgreSQL storage — built with Next.js 15 App Router, Prisma, Neon, and Tailwind CSS.
 
-## Getting Started
+📆 Completed on: July 10, 2025
+🧑‍💻 Built by: Megha John
 
-First, run the development server:
 
-```bash
+🧠 Features
+✅ Hero Search: Business lookup (mocked or Google Places API)
+
+✅ Multi-Step Flow:
+
+Step 1: Business search
+
+Step 2: Confirmation card
+
+Step 3: Create Account (name, email, phone, website)
+
+Step 4: Terms + Upgrade options
+
+✅ Stripe Checkout (post-trial freemium conversion)
+
+✅ Lead Capture: All user input stored in PostgreSQL via Neon
+
+✅ Confetti Celebration 🎉
+
+✅ Responsive + Animated UI with Tailwind + Framer Motion
+
+🛠 Tech Stack
+Frontend	Backend/API	Database	Auth / Payments
+Next.js 15 App Router	API Routes (Node.js)	PostgreSQL via Neon	Stripe Checkout
+Tailwind CSS	Prisma ORM	Prisma Schema	(Optional: Supabase)
+Framer Motion	TypeScript	Neon Dashboard	
+
+🗂 Folder Structure
+pgsql
+Copy
+Edit
+app/
+  ├─ api/leads         → lead creation & updates
+  ├─ api/checkout      → Stripe checkout session
+  ├─ verify            → confirm business page
+  ├─ create-account    → form to collect user info
+  ├─ success           → upgrade celebration page
+  └─ terms             → TOS & opt-in upgrade
+💾 Database Schema
+prisma
+Copy
+Edit
+model Lead {
+  id        String   @id @default(uuid())
+  business  String
+  phone     String?
+  upgraded  Boolean  @default(false)
+  fullName  String?
+  email     String?
+  website   String?
+  createdAt DateTime @default(now())
+}
+⚙️ Setup & Development
+bash
+Copy
+Edit
+git clone https://github.com/John27052001/swipe-savvy.git
+cd swipe-savvy
+
+# Install dependencies
+npm install
+
+# Add your environment variables
+touch .env.local
+Required .env.local
+ini
+Copy
+Edit
+DATABASE_URL=postgresql://...
+STRIPE_SECRET_KEY=sk_test_...
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
+Then run locally:
+bash
+Copy
+Edit
+npx prisma generate
+npx prisma migrate dev --name init
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🧪 Test Stripe
+Use Stripe test card:
+4242 4242 4242 4242 — Exp: 12/34 — CVC: 123
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+📌 Deployment
+Frontend + API hosted on Vercel
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Database hosted on Neon
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Stripe integrated securely in server API route
 
-## Learn More
+🙌 Acknowledgments
+Inspired by real-world SaaS upgrade flows like Square, ToastTab, and Yelp.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+💬 Contact
+Megha John
