@@ -59,9 +59,9 @@ npm install
 ### 3. Set Up Environment Variables
 Create a `.env` file:
 ```env
-DATABASE_URL="your_postgresql_url"
-STRIPE_SECRET_KEY="your_stripe_secret_key"
-STRIPE_PRICE_ID="your_stripe_price_id"
+DATABASE_URL="postgresql://neondb_owner:npg_9dz1DvKumtHN@ep-soft-tree-adi1x2as-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+STRIPE_SECRET_KEY="sk_test_51Rj8l2FMqUB3TLQjq9LNx7alRVZI277dbJL9WaGJsPAEMIROjcWyrpWNdD6pGlGy3omTZrejDsYa7Sksbzv9NlFa00LW4g5Eh3"
+STRIPE_PRICE_ID="price_1Rj8syFMqUB3TLQjf7AY6cXz"
 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY="your_google_maps_key"
 NEXT_PUBLIC_BASE_URL="http://localhost:3000"
 ```
